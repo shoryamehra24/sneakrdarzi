@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Sneaker Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f9;
+            color: #333;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1A1F2C;
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        @media (min-width: 480px) {
+            .buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .primary-btn {
+            background-color: #1A1F2C;
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background-color: #404756;
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background-color: white;
+            color: #1A1F2C;
+            border: 1px solid #ddd;
+        }
+
+        .secondary-btn:hover {
+            background-color: #f1f1f1;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Premium Sneaker Collection</h1>
+        <p>Discover our exclusive selection of limited edition sneakers</p>
+
+        <div class="buttons">
+            <a href="/login" class="btn primary-btn">Sign In</a>
+            <a href="/shoe-box" class="btn secondary-btn">Browse Collection</a>
+        </div>
+    </div>
+</body>
+</html>
