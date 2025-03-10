@@ -26,7 +26,7 @@ function showSneaker() {
         const sneaker = sneakers[currentIndex];
         document.getElementById('sneaker-image').src = sneaker.sneaker_image;
         document.getElementById('sneaker-title').innerText = sneaker.sneaker_title;
-        document.getElementById('sneaker-price').innerText = sneaker.price;
+        document.getElementById('sneaker-price').innerText = `₹${sneaker.price}`;  // Updated to rupee symbol
         document.getElementById('sneaker-desc').innerText = sneaker.desc;
     } else {
         document.getElementById('sneaker-card').innerHTML = '<h3>No more sneakers!</h3>';
