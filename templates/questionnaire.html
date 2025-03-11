@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sneaker Preferences</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .color-box {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            margin: 5px;
+            cursor: pointer;
+            position: relative;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-box:hover::after {
+            content: attr(data-color);
+            position: absolute;
+            background: black;
+            color: white;
+            padding: 3px 6px;
+            font-size: 12px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+
+        .color-box:nth-child(-n+9):hover::after {
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .color-box:nth-child(n+10):hover::after {
+            top: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .color-box.selected::after {
+            content: "✔";
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .gender-box {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            transition: 0.3s;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .gender-box:hover, .gender-box.selected {
+            border: 2px solid black;
+            background-color: #f1f1f1;
+        }
+
+        .budget-option {
+            padding: 8px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            background: #e9ecef;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .budget-option:hover, .budget-option.selected {
+            background: #28a745;
+            color: white;
+        }
+
+        .age-container {
+            text-align: center;
+        }
+
+        .cake {
+            font-size: 40px;
+        }
+
+        .next-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .next-button:hover {
+            background: #218838;
+        }
+
+        /* Brand Selection */
+        .brand-box {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 2px solid transparent;
+            transition: 0.3s;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            background: #e9ecef;
+        }
+
+        .brand-box:hover, .brand-box.selected {
+            border: 2px solid #007bff;
+            background: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Tell us about your sneaker preferences! 👟</div>
+
+        <!-- Age -->
+        <div class="mb-4">
+            <label class="form-label"> Age:</label>
+            <div class="age-container">
+                <span class="cake">🎂</span>
+                <input type="range" id="age" min="10" max="100" value="20" class="form-range" oninput="updateAge()">
+                <span id="age-value">20</span>
+            </div>
+        </div>
+
+        <!-- Gender -->
+        <div class="mb-4">
+            <label class="form-label">👤 Select Gender:</label>
+            <div>
+                <div class="gender-box" onclick="selectGender(this, 'Male')">🚹 Male</div>
+                <div class="gender-box" onclick="selectGender(this, 'Female')">🚺 Female</div>
+                <div class="gender-box" onclick="selectGender(this, 'Prefer not to say')">🤷 Prefer not to say</div>
+            </div>
+        </div>
+
+        <!-- Budget -->
+        <div class="mb-4">
+            <label class="form-label">💰 Select Your Budget:</label>
+            <div>
+                <div class="budget-option" onclick="selectBudget(this, 'Under ₹2000')">Under ₹2000</div>
+                <div class="budget-option" onclick="selectBudget(this, '₹2000 - ₹5000')">₹2000 - ₹5000</div>
+                <div class="budget-option" onclick="selectBudget(this, '₹5000 - ₹10000')">₹5000 - ₹10000</div>
+                <div class="budget-option" onclick="selectBudget(this, '₹10000 - ₹15000')">₹10000 - ₹15000</div>
+                <div class="budget-option" onclick="selectBudget(this, '₹15000+')">₹15000+</div>
+            </div>
+        </div>
+
+        <!-- Colors -->
+        <div class="mb-4">
+            <label class="form-label">🎨 Choose Colors:</label>
+            <div id="color-palette">
+                <!-- 20 Colors -->
+                <div class="color-box" style="background: black;" data-color="Black"></div>
+                <div class="color-box" style="background: white; border: 1px solid black;" data-color="White"></div>
+                <div class="color-box" style="background: beige;" data-color="Beige"></div>
+                <div class="color-box" style="background: red;" data-color="Red"></div>
+                <div class="color-box" style="background: blue;" data-color="Blue"></div>
+                <div class="color-box" style="background: green;" data-color="Green"></div>
+                <div class="color-box" style="background: yellow;" data-color="Yellow"></div>
+                <div class="color-box" style="background: pink;" data-color="Pink"></div>
+                <div class="color-box" style="background: brown;" data-color="Brown"></div>
+                <div class="color-box" style="background: orange;" data-color="Orange"></div>
+                <div class="color-box" style="background: purple;" data-color="Purple"></div>
+                <div class="color-box" style="background: navy;" data-color="Navy"></div>
+                <div class="color-box" style="background: grey;" data-color="Grey"></div>
+                <div class="color-box" style="background: teal;" data-color="Teal"></div>
+                <div class="color-box" style="background: maroon;" data-color="Maroon"></div>
+                <div class="color-box" style="background: gold;" data-color="Gold"></div>
+                <div class="color-box" style="background: silver;" data-color="Silver"></div>
+                <div class="color-box" style="background: lavender;" data-color="Lavender"></div>
+                <div class="color-box" style="background: cyan;" data-color="Cyan"></div>
+            </div>
+        </div>
+
+        <!-- Brands -->
+        <div class="mb-4">
+            <label class="form-label">🏷️ Choose Brands:</label>
+            <div id="brand-selection">
+                <!-- Example Brands -->
+                <div class="brand-box" data-brand="Nike">Nike</div>
+                <div class="brand-box" data-brand="Adidas">Adidas</div>
+                <div class="brand-box" data-brand="Puma">Puma</div>
+                <div class="brand-box" data-brand="Reebok">Reebok</div>
+                <div class="brand-box" data-brand="Under Armour">Under Armour</div>
+                <div class="brand-box" data-brand="New Balance">New Balance</div>
+                <div class="brand-box" data-brand="Converse">Converse</div>
+                <div class="brand-box" data-brand="Vans">Vans</div>
+                <div class="brand-box" data-brand="Asics">Asics</div>
+            </div>
+        </div>
+
+        <button class="next-button">Next →</button>
+    </div>
+
+    <script>
+        function updateAge() {
+            document.getElementById('age-value').innerText = document.getElementById('age').value;
+        }
+
+        function selectGender(element) {
+            document.querySelectorAll('.gender-box').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function selectBudget(element) {
+            document.querySelectorAll('.budget-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        document.querySelectorAll('.color-box').forEach(box => {
+            box.addEventListener('click', () => box.classList.toggle('selected'));
+        });
+
+        // Allow multi-selection of brands
+        document.querySelectorAll('.brand-box').forEach(box => {
+            box.addEventListener('click', () => box.classList.toggle('selected'));
+        });
+    </script>
+</body>
+</html>
