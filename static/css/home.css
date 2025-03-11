@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f8f3e9; /* Light beige background */
+    color: #333; /* Dark text for readability */
+}
+
+/* Navigation Bar */
+nav {
+    width: 100%;
+    height: 10vh;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    margin-left: 20px;
+    width: 100px;
+    filter: drop-shadow(2px 2px 2px #333);
+}
+
+.links a {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    margin: 0 20px;
+    transition: 0.3s linear;
+}
+
+.links a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    background-color: #f74f10;
+    height: 3.5px;
+    transition: 0.3s linear;
+}
+
+.links a:hover::before,
+.links a:hover {
+    color: #f74f10;
+    width: 100%;
+}
+
+.search i {
+    color: #333;
+    cursor: pointer;
+    font-size: 1.3rem;
+    margin-right: 20px;
+}
+
+/* Main Section */
+section {
+    width: 100%;
+    height: 90vh;
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.main-content {
+    color: #333;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.main-content h1 {
+    font-size: clamp(4rem, 7rem + 7vw, 5rem);
+}
+
+.main-content h2 {
+    color: #f74f10;
+    font-size: clamp(1rem, 1rem + 2vw, 2rem);
+}
+
+.main-content p {
+    margin-top: 10px;
+    color: #232222;
+}
+
+.order {
+    display: flex;
+    margin: 20px 10px;
+    width: 100%;
+    justify-content: space-around;
+    min-height: 7vh;
+}
+
+.order a {
+    text-decoration: none;
+    display: flex; /* Ensures the button inside takes full width */
+}
+
+.order button {
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #f74f10 20%, #8a3313);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.order button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+.order button:hover {
+    box-shadow: 0 0 30px #f74f10;
+    background: linear-gradient(to bottom right, #8a3313, #f74f10 20%);
+}
+
+
+.order .login-btn {
+    min-width: 45%;
+    margin-left: 10px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background: linear-gradient(to bottom right, #f74f10 40%, #8a3313);
+    color: white;
+    font-weight: 700;
+    padding: 0 2px;
+    font-size: clamp(0.6rem, 1rem 5vw, 3rem);
+    transition: 0.1s linear;
+    cursor: pointer;
+}
+
+.order button:hover,
+.order .login-btn:hover {
+    box-shadow: 0 0 30px #f74f10;
+    background: linear-gradient(to bottom right, #8a3313, #f74f10 40%);
+}
+
+.image {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+  opacity: 0.15; /* Lowered opacity */
+}
+
+.image img {
+  max-width: 700px; /* Adjust size as needed */
+  width: 80%;
+  height: auto;
+  transform: none;
+  filter: none;
+}
+
+/* Center the text */
+.main-content {
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Center the buttons */
+.order {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 800px) {
+    .content {
+        flex-direction: column-reverse;
+    }
+
+    .main-content {
+        margin: 0 10px;
+    }
+}
+
+@media (min-width: 884px) {
+    .image img {
+        min-width: 500px;
+    }
+}
+
+@media (max-width: 440px) {
+    .links {
+        display: none;
+    }
+
+    .image img {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+.made-in-india {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #333; /* Matches your text color */
+  margin-top: 20px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.made-in-india span {
+  color: #f74f10; /* Matches the orange gradient of buttons */
+  font-size: 1.4rem;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.made-in-india:hover {
+  color: #f74f10;
+  transition: 0.3s ease-in-out;
+}
