@@ -12,7 +12,7 @@ order_data = {}
 
 @app.route('/')
 def home():
-    return render_template('home.html')  # Main interface
+    return render_template('sneakers.html')  # Main interface
 
 @app.route('/shoe-box')
 def shoe_box():
