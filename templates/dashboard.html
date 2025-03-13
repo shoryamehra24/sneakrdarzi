@@ -13,6 +13,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
 
         /* Cart Button */
@@ -36,27 +38,28 @@
             background-color: #b66336;
         }
 
-        /* Welcome Section */
+        /* Welcome Section (Centered) */
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
         .welcome-text {
             color: #d17742;
             font-size: 36px;
             font-weight: bold;
-            align-self: flex-start;
-            margin-bottom: 10px;
         }
 
         .sub-text {
             color: #7a7a7a;
             font-size: 16px;
-            align-self: flex-start;
-            margin-bottom: 30px;
         }
 
         /* Button Container */
         .container {
             display: flex;
             gap: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 80px;
         }
 
         .box {
@@ -71,7 +74,6 @@
             justify-content: center;
             padding: 20px;
             transition: transform 0.3s;
-            /* Added border */
             border: 2px solid #d17742;
         }
 
@@ -111,21 +113,28 @@
             font-size: 20px;
             color: #d17742;
             font-weight: bold;
-            margin-bottom: 20px;
             text-align: center;
+            margin-top: 40px;
         }
 
-        .brand-wrapper {
+        /* Scrolling Brand Wrapper */
+        .brand-container {
+            overflow: hidden;
+            white-space: nowrap;
             width: 100%;
             background-color: white;
-            padding: 12px;
+            padding: 16px;
             border-radius: 12px;
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            position: relative;
+            margin-top: -10px;
+        }
+
+        .brand-track {
             display: flex;
-            justify-content: center;
             gap: 40px;
-            flex-wrap: wrap;
+            animation: scroll 15s linear infinite;
+            width: max-content;
         }
 
         .brand-item {
@@ -142,12 +151,15 @@
             border-radius: 4px;
         }
 
-        .brand-item span {
-            font-size: 14px;
-            color: #555;
-            font-weight: bold;
-            text-align: center;
+        @keyframes scroll {
+            from {
+                transform: translateX(0%);
+            }
+            to {
+                transform: translateX(-50%);
+            }
         }
+
     </style>
 </head>
 <body>
@@ -155,9 +167,11 @@
     <!-- Go to Cart Button -->
     <button class="cart-btn">Go to Cart</button>
 
-    <!-- Welcome Section -->
-    <h1 class="welcome-text">Welcome, Hardik!</h1>
-    <p class="sub-text">Your sneaker journey begins here</p>
+    <!-- Welcome Section (Now Centered) -->
+    <div class="welcome-section">
+        <h1 class="welcome-text">Welcome, Hardik!</h1>
+        <p class="sub-text">Your sneaker journey begins here</p>
+    </div>
 
     <div class="container">
         <!-- First Box -->
@@ -173,42 +187,18 @@
         </div>
     </div>
 
-    <!-- Brands Section -->
+    <!-- Brands Section (Moved Down) -->
     <h2 class="brands-title">Brands Available</h2>
 
-    <div class="brand-wrapper">
-        <div class="brand-item">
-            <img src="{{ url_for('static', filename='Prada logo.png') }}" alt="Prada Logo">
-        </div>
-        <div class="brand-item">
-            <img src="{{ url_for('static', filename='MK logo.png') }}" alt="Michael Kors Logo">
-        </div>
-        <div class="brand-item">
-            <img src="{{ url_for('static', filename='burberry logo.png') }}" alt="Burberry Logo">
-        </div>
-        <div class="brand-item">
-            <img src="{{ url_for('static', filename='Valentino logo.png') }}" alt="Valentino Logo">
-        </div>
-        <div class="brand-item">
-            <img src="{{ url_for('static', filename='Nike logo.png') }}" alt="Nike Logo">
-        </div>
-        <div class="brand-item">
-            <img src="{{ url_for('static', filename='Adidas_logo.png') }}" alt="Adidas Logo">
-        </div>
-        <div class="brand-item">
-            <img src="{{ url_for('static', filename='Puma logo.png') }}" alt="Puma Logo">
-        </div>
-        <div class="brand-item">
-            <img src="{{ url_for('static', filename='NB logo.png') }}" alt="New Balance Logo">
-        </div>
-        <div class="brand-item">
-            <img src="{{ url_for('static', filename='D & G logo.png') }}" alt="D&G Logo">
-        </div>
-        <div class="brand-item">
-            <img src="{{ url_for('static', filename='Alexander logo.png') }}" alt="Alexander Logo">
-        </div>
-        <div class="brand-item">
-            <img src="{{ url_for('static', filename='Balenciaga logo.jpg') }}" alt="Balenciaga Logo">
+    <div class="brand-container">
+        <div class="brand-track">
+            {% for i in range(4) %}
+                {% for brand in ["Burberry", "Valentino", "Nike", "Adidas", "Puma", "NB", "D & G", "Alexander", "Balenciaga", "MK"] %}
+                <div class="brand-item">
+                    <img src="{{ url_for('static', filename='img/' + brand + ' logo.png') }}" alt="{{ brand }} Logo">
+                </div>
+                {% endfor %}
+            {% endfor %}
         </div>
     </div>
 
