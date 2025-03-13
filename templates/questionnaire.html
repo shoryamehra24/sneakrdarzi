@@ -89,6 +89,7 @@
         .gender-box:hover, .gender-box.selected {
             border: 2px solid black;
             background-color: #f1f1f1;
+            
         }
 
         .budget-option {
@@ -171,9 +172,9 @@
         <div class="mb-4">
             <label class="form-label">👤 Select Gender:</label>
             <div>
-                <div class="gender-box" onclick="selectGender(this, 'Male')">🚹 Male</div>
-                <div class="gender-box" onclick="selectGender(this, 'Female')">🚺 Female</div>
-                <div class="gender-box" onclick="selectGender(this, 'Prefer not to say')">🤷 Prefer not to say</div>
+                <div class="gender-box" onclick="selectGender(this, 'Male')">Male</div>
+                <div class="gender-box" onclick="selectGender(this, 'Female')">Female</div>
+                <div class="gender-box" onclick="selectGender(this, 'Unisex')">Unisex</div>
             </div>
         </div>
 
@@ -194,6 +195,7 @@
             <label class="form-label">🎨 Choose Colors:</label>
             <div id="color-palette">
                 <!-- 20 Colors -->
+                <div class="color-box all-colors" data-color="All">All Colors</div>
                 <div class="color-box" style="background: black;" data-color="Black"></div>
                 <div class="color-box" style="background: white; border: 1px solid black;" data-color="White"></div>
                 <div class="color-box" style="background: beige;" data-color="Beige"></div>
@@ -221,15 +223,15 @@
             <label class="form-label">🏷️ Choose Brands:</label>
             <div id="brand-selection">
                 <!-- Example Brands -->
-                <div class="brand-box" data-brand="Nike">Nike</div>
-                <div class="brand-box" data-brand="Adidas">Adidas</div>
-                <div class="brand-box" data-brand="Puma">Puma</div>
-                <div class="brand-box" data-brand="Reebok">Reebok</div>
-                <div class="brand-box" data-brand="Under Armour">Under Armour</div>
+                <div class="brand-box" data-brand="Louis Vuitton">Louis Vuitton</div>
+                <div class="brand-box" data-brand="Valentino">Valentino</div>
+                <div class="brand-box" data-brand="Prada">Prada</div>
+                <div class="brand-box" data-brand="Alexander McQueen">Alexander McQueen</div>
+                <div class="brand-box" data-brand="Burberry">Burberry</div>
                 <div class="brand-box" data-brand="New Balance">New Balance</div>
-                <div class="brand-box" data-brand="Converse">Converse</div>
-                <div class="brand-box" data-brand="Vans">Vans</div>
-                <div class="brand-box" data-brand="Asics">Asics</div>
+                <div class="brand-box" data-brand="Gucci">Gucci</div>
+                <div class="brand-box" data-brand="Balenciaga">Balenciaga</div>
+                <div class="brand-box" data-brand="Golden Goose">Golden Goose</div>
             </div>
         </div>
 
@@ -238,27 +240,57 @@
 
     <script>
         function updateAge() {
-            document.getElementById('age-value').innerText = document.getElementById('age').value;
+    document.getElementById('age-value').innerText = document.getElementById('age').value;
+}
+
+function selectGender(element) {
+    document.querySelectorAll('.gender-box').forEach(el => el.classList.remove('selected'));
+    element.classList.add('selected');
+}
+
+function selectBudget(element) {
+    document.querySelectorAll('.budget-option').forEach(el => el.classList.remove('selected'));
+    element.classList.add('selected');
+}
+
+document.querySelectorAll(".color-box").forEach(box => {
+    box.addEventListener("click", function () {
+        if (this.classList.contains("all-colors")) {
+            document.querySelectorAll(".color-box").forEach(el => el.classList.remove("selected"));
+            this.classList.add("selected");
+        } else {
+            document.querySelector(".all-colors").classList.remove("selected");
+            this.classList.toggle("selected");
         }
+    });
+});
 
-        function selectGender(element) {
-            document.querySelectorAll('.gender-box').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
-        }
+// Brand selection logic
+document.querySelectorAll(".brand-box").forEach(box => {
+    box.addEventListener("click", function () {
+        this.classList.toggle("selected");
+    });
+});
 
-        function selectBudget(element) {
-            document.querySelectorAll('.budget-option').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
-        }
+document.querySelector(".next-button").addEventListener("click", function () {
+    const selectedGender = document.querySelector(".gender-box.selected")?.innerText || "";
+    const selectedBudget = document.querySelector(".budget-option.selected")?.innerText || "";
+    const selectedColors = document.querySelector(".all-colors.selected") 
+        ? ["All"] 
+        : [...document.querySelectorAll(".color-box.selected")].map(el => el.getAttribute("data-color"));
+    const selectedBrands = [...document.querySelectorAll(".brand-box.selected")].map(el => el.getAttribute("data-brand"));
 
-        document.querySelectorAll('.color-box').forEach(box => {
-            box.addEventListener('click', () => box.classList.toggle('selected'));
-        });
+    const filters = {
+        gender: selectedGender,
+        budget: selectedBudget,
+        colors: selectedColors,
+        brands: selectedBrands
+    };
 
-        // Allow multi-selection of brands
-        document.querySelectorAll('.brand-box').forEach(box => {
-            box.addEventListener('click', () => box.classList.toggle('selected'));
-        });
+    localStorage.setItem("sneakerFilters", JSON.stringify(filters));
+    window.location.href = "/sneakers";
+});
+
     </script>
 </body>
 </html>
