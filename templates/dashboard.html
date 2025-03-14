@@ -38,7 +38,7 @@
             background-color: #b66336;
         }
 
-        /* Welcome Section (Centered) */
+        /* Welcome Section */
         .welcome-section {
             text-align: center;
             margin-bottom: 40px;
@@ -165,29 +165,29 @@
 <body>
 
     <!-- Go to Cart Button -->
-    <button class="cart-btn">Go to Cart</button>
+    <button class="cart-btn" onclick="window.location.href='/shoe-box'" >Go to Cart</button>
 
-    <!-- Welcome Section (Now Centered) -->
+    <!-- Welcome Section -->
     <div class="welcome-section">
         <h1 class="welcome-text">Welcome, Hardik!</h1>
         <p class="sub-text">Your sneaker journey begins here</p>
     </div>
 
     <div class="container">
-        <!-- First Box -->
+        <!-- Manage Preferences Box -->
         <div class="box">
             <p class="description">Edit your preferences here</p>
-            <button class="button">Manage Preferences</button>
+            <button class="button" onclick="window.location.href='/questionnaire'">Manage Preferences</button>
         </div>
 
-        <!-- Second Box -->
+        <!-- Let's Get Started Box (FIXED) -->
         <div class="box">
             <p class="description">Choose your sneakers</p>
-            <button class="button">Let's Get Started</button>
+            <button class="button" onclick="window.location.href='/sneakers'">Let's Get Started</button>
         </div>
     </div>
 
-    <!-- Brands Section (Moved Down) -->
+    <!-- Brands Section -->
     <h2 class="brands-title">Brands Available</h2>
 
     <div class="brand-container">
