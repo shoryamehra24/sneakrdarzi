@@ -27,7 +27,8 @@
 
 <body>
     <div class="container mt-4">
-        <button onclick="goBack()" class="btn btn-dark back-button">← Back to Swiping</button>
+        <button class="btn btn-dark back-button" onclick="window.location.href='/sneakers'">← Back to Swiping</button>
+
         <h2 class="mb-4 text-center">Your Shoe Box 🛒</h2>
 
         <div class="row">
@@ -42,6 +43,7 @@
                     <hr>
                     <p><strong>Subtotal:</strong> <span id="subtotal">₹0.00</span></p>
                     <button class="btn btn-success w-100 mt-3" onclick="proceedToPayment()">Proceed to Payment</button>
+                    <button class="btn btn-danger w-100 mt-2" onclick="clearCart()">Clear Cart</button> <!-- New Button -->
                 </div>
             </div>
         </div>
@@ -88,6 +90,11 @@
 
         function proceedToPayment() {
             window.location.href = '/shipping';
+        }
+
+        function clearCart() {
+            localStorage.removeItem('likedSneakers');  // Clear all sneakers from local storage
+            loadShoeBox();  // Refresh UI
         }
 
         loadShoeBox();
