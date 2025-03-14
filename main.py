@@ -12,7 +12,15 @@ order_data = {}
 
 @app.route('/')
 def home():
-    return render_template('sneakers.html')  # Main interface
+    return render_template('dashboard.html')  # Load questionnaire first
+
+@app.route('/questionnaire', methods=['GET', 'POST'])
+def questionnaire():
+    return render_template('questionnaire.html')  # Load questionnaire page
+
+@app.route('/sneakers')
+def sneakers():
+    return render_template('sneakers.html')  # After questionnaire, show sneakers
 
 @app.route('/shoe-box')
 def shoe_box():
