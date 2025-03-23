@@ -1,0 +1,23 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+input[type="file"] {
+  margin-bottom: 20px;
+}
+
+.sneaker-card {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 200px;
+}
+
+.sneaker-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}

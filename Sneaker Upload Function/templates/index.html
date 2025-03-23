@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SneakerDarzi - Visual Search</title>
+  <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+  <h1>SneakerDarzi - Visual Search</h1>
+  <p>Upload a sneaker image to find similar ones.</p>
+
+  <input type="file" id="sneakerImage" accept="image/*" />
+  <button id="checkBtn">Check</button>
+
+  <h2>Matching Sneakers:</h2>
+  <div id="resultsContainer"></div>
+
+  <!-- TensorFlow.js and MobileNet -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+
+  <!-- Your main.js script -->
+  <script src="static/js/main.js"></script>
+</body>
+</html>
