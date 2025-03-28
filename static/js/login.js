@@ -32,6 +32,18 @@ document.addEventListener('DOMContentLoaded', function() {
         animateFormTransition();
     });
 
+    // Validate password complexity
+    form.addEventListener('submit', function(event) {
+        const password = passwordInput.value;
+        const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+        if (!passwordPattern.test(password)) {
+            event.preventDefault(); // Prevent form submission
+            alert("Password must be at least 6 characters long, include one uppercase letter, one number, and one special character.");
+            passwordInput.focus();
+        }
+    });
+
     // Toggle password visibility
     togglePasswordButton.addEventListener('click', function() {
         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
