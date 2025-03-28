@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SneakerDarzi - Visual Search</title>
+  <link rel="stylesheet" href="static/css/styles.css">
+  <style>
+    /* General Styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #d0e7ff;   /* Light blue background */
+      color: #333;
+      text-align: center;
+    }
+
+    /* Dark Blue Title Box */
+    .title-box {
+      background-color: #003366;   /* Dark blue color */
+      color: white;                /* White text */
+      padding: 30px 20px;
+      font-size: 32px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    /* White Box Container for Clean Effect */
+    .container {
+      background: white;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 40px;
+    }
+
+    h2, p {
+      margin: 20px 0;
+    }
+
+    /* Input and Button Styling */
+    input, button {
+      padding: 12px 20px;
+      margin: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 80%;
+      max-width: 600px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Results Container */
+    #resultsContainer {
+      display: flex;
+      flex-direction: column;   /* One below the other */
+      align-items: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .sneaker-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 90%;
+      max-width: 800px;
+      transition: transform 0.3s;
+    }
+    .sneaker-card:hover {
+      transform: translateY(-5px);
+    }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    /* "How It Works" Section */
+    .how-it-works {
+      background: white;
+      padding: 30px;
+      margin: 40px auto;
+      max-width: 1000px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+    ol {
+      line-height: 1.8;
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dark Blue Title Box -->
+  <div class="title-box">SneakerDarzi</div>
+
+  <!-- White Box Container -->
+  <div class="container">
+
+    <!-- "How It Works" Section -->
+    <div class="how-it-works">
+      <h2>How It Works</h2>
+      <ol>
+        <li><strong>Upload Image:</strong> Select or drag & drop an image of sneakers.</li>
+        <li><strong>AI Analysis:</strong> Our system identifies the sneaker model.</li>
+        <li><strong>Get Results:</strong> View matching sneakers with prices and links.</li>
+      </ol>
+    </div>
+
+    <h2>Visual Search</h2>
+    <p>Upload a sneaker image to find similar ones.</p>
+
+    <input type="file" id="sneakerImage" accept="image/*" />
+    <button id="checkBtn">Check</button>
+
+    <h2>Matching Sneakers:</h2>
+    <div id="resultsContainer"></div>
+
+  </div>
+
+  <!-- TensorFlow.js and MobileNet -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+
+  <!-- Your main.js script -->
+  <script src="static/js/main.js"></script>
+
+</body>
+</html>
