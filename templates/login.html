@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +26,18 @@
                 <h1 id="title">Welcome Back</h1>
                 <p id="subtitle">Log in to access your sneaker collection</p>
             </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message {{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
 
             <form id="auth-form" action="{{ url_for('login_user') }}" method="POST">
                 <div class="form-group">
@@ -74,13 +85,13 @@
                         </button>
                     </div>
                 </div>
-                <button type="submit" class="submit-button">Sign In</button>
 
+                <button type="submit" class="submit-button" onclick="window.location.href='/dashboard'">Sign In</button>
 
-                <!-- <div class="divider">
+                <div class="divider">
                     <span>or</span>
-                </div> -->
-<!-- 
+                </div>
+
                 <div class="social-login">
                     <a href="{{ url_for('login_google') }}" class="social-button google">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +103,13 @@
                         <span>Continue with Google</span>
                     </a>
                 </div>
-            </form> -->
+            </form>
+
+            <div class="auth-footer">
+                <p>Don't have an account? <button type="button" id="toggle-mode">Sign Up</button></p>
+            </div>
+        </div>
+    </div>
 
     <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
