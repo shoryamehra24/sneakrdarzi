@@ -1,72 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SneakerDarzi - Home</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
     <style>
+        /* General Styles */
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #fdf6f0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #f4f7ff, #e9efff);
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            flex-direction: column;
+        }
+
+        /* Content Area Styles */
+        .content {
+            flex-grow: 1;
+            padding: 30px;
+            text-align: center;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            justify-content: flex-start;
         }
 
-        /* Cart Button */
-        .cart-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 12px 24px;
-            background-color: #d17742;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .cart-btn:hover {
-            background-color: #b66336;
-        }
-
-        /* Welcome Section */
-        .welcome-section {
-            text-align: center;
-            margin-bottom: 40px;
+        /* Dashboard Styles */
+        .dashboard-container {
+            padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* add this line */
         }
 
         .welcome-text {
-            color: #d17742;
-            font-size: 36px;
-            font-weight: bold;
+            font-size: 28px;
+            font-weight: 600;
+            color: #4A47A3;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
         .sub-text {
-            color: #7a7a7a;
             font-size: 16px;
+            color: #7a7a7a;
+            margin-bottom: 20px;
         }
 
-        /* Button Container */
-        .container {
+        .feature-container {
             display: flex;
+            justify-content: center;
             gap: 20px;
-            margin-bottom: 80px;
+            margin-bottom: 30px;
         }
 
-        .box {
-            width: 320px;
-            height: 180px;
+        .feature-box {
+            width: 280px;
             background-color: white;
-            border-radius: 16px;
+            border-radius: 6px;
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
@@ -74,29 +73,19 @@
             justify-content: center;
             padding: 20px;
             transition: transform 0.3s;
-            border: 2px solid #d17742;
         }
 
-        .box:hover {
+        .feature-box:hover {
             transform: translateY(-5px);
-            border-color: #b66336;
-        }
-
-        .description {
-            color: #7a7a7a;
-            font-size: 16px;
-            margin-bottom: 12px;
-            font-weight: bold;
-            text-align: center;
         }
 
         .button {
             padding: 12px 24px;
             font-size: 16px;
             color: white;
-            background-color: #d17742;
+            background-color: #4A47A3;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
             width: 100%;
@@ -105,102 +94,336 @@
         }
 
         .button:hover {
-            background-color: #b66336;
+            background-color: #3a388a;
         }
 
-        /* Brands Section */
-        .brands-title {
-            font-size: 20px;
-            color: #d17742;
+        /* Trending Styles */
+        .trending-title {
+            font-size: 28px;
+            color: #4A47A3;
             font-weight: bold;
             text-align: center;
-            margin-top: 40px;
+            margin-top: 30px;
+            margin-bottom: 20px;
         }
 
-        /* Scrolling Brand Wrapper */
-        .brand-container {
-            overflow: hidden;
-            white-space: nowrap;
-            width: 100%;
-            background-color: white;
-            padding: 16px;
+        .trending-container {
+    display: grid;
+    /* Changed to grid layout */
+    grid-template-columns: repeat(4, 300px);
+    /* Changed to three fixed-width columns */
+    gap: 30px;
+    /* Increased gap */
+    padding: 30px;
+    /* Increased padding */
+    background: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    /* Enhanced shadow */
+    border-radius: 12px;
+    /* Rounded corners */
+    margin-bottom: 40px;
+    /* Increased margin */
+    overflow: visible;
+    /* Allow overflow for content */
+}
+
+
+        .trending-item {
+            background: #f9f9f9;
             border-radius: 12px;
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             position: relative;
-            margin-top: -10px;
-        }
-
-        .brand-track {
-            display: flex;
-            gap: 40px;
-            animation: scroll 15s linear infinite;
-            width: max-content;
-        }
-
-        .brand-item {
+            transition: transform 0.3s ease;
+            text-align: left;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 5px;
+            justify-content: space-between;
         }
 
-        .brand-item img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            border-radius: 4px;
+        .trending-item:hover {
+            transform: translateY(-8px);
         }
 
-        @keyframes scroll {
-            from {
-                transform: translateX(0%);
-            }
-            to {
-                transform: translateX(-50%);
-            }
+        .trending-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
+        .trending-item h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .trending-item p {
+            font-size: 1em;
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .trending-item a {
+            display: block;
+            padding: 12px 24px;
+            background-color: #4A47A3;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            margin-top: auto;
+        }
+
+        .trending-item a:hover {
+            background-color: #3a388a;
+        }
+
+        .trending-item .tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #FF4500;
+            color: white;
+            padding: 7px 12px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+         /* Brand Scroll Styles */
+.brands-title {
+    font-size: 24px;
+    color: #4A47A3;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.brand-scroll {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    background: white; /* Changed background to white */
+    padding: 15px 0;
+}
+
+.brand-track {
+    display: inline-flex;
+    animation: scroll 30s linear infinite;
+    gap: 40px;
+    width: max-content;
+}
+
+.brand-item img {
+    width: 140px;
+    height: 70px;
+    object-fit: contain;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(20%);
+    }
+}
+
+        }
     </style>
 </head>
+
 <body>
-
-    <!-- Go to Cart Button -->
-    <button class="cart-btn" onclick="window.location.href='/shoe-box'" >Go to Cart</button>
-
-    <!-- Welcome Section -->
-    <div class="welcome-section">
-        <h1 class="welcome-text">Welcome, Hardik!</h1>
-        <p class="sub-text">Your sneaker journey begins here</p>
-    </div>
-
-    <div class="container">
-        <!-- Manage Preferences Box -->
-        <div class="box">
-            <p class="description">Edit your preferences here</p>
-            <button class="button" onclick="window.location.href='/questionnaire'">Manage Preferences</button>
-        </div>
-
-        <!-- Let's Get Started Box (FIXED) -->
-        <div class="box">
-            <p class="description">Choose your sneakers</p>
-            <button class="button" onclick="window.location.href='/sneakers'">Let's Get Started</button>
-        </div>
-    </div>
-
-    <!-- Brands Section -->
-    <h2 class="brands-title">Brands Available</h2>
-
-    <div class="brand-container">
-        <div class="brand-track">
-            {% for i in range(4) %}
-                {% for brand in ["Burberry", "Valentino", "Nike", "Adidas", "Puma", "NB", "D & G", "Alexander", "Balenciaga", "MK"] %}
-                <div class="brand-item">
-                    <img src="{{ url_for('static', filename='img/' + brand + ' logo.png') }}" alt="{{ brand }} Logo">
+    <div class="content">
+        <div class="dashboard-container">
+            <h1 class="welcome-text">SneakerDarzi</h1>
+            <p class="sub-text">Discover your perfect sneakers and express your unique style</p>
+            <div class="feature-container">
+                <div class="feature-box">
+                    <p><strong>Personalize Your Experience</strong></p>
+                    <button class="button" onclick="window.location.href='/questionnaire'">Manage Preferences</button>
                 </div>
-                {% endfor %}
-            {% endfor %}
+                <div class="feature-box">
+                    <p><strong>Find Your Perfect Pair</strong></p>
+                    <button class="button" onclick="window.location.href='/sneakers'">Let's Get Started</button>
+                </div>
+                <div class="feature-box">
+                    <p><strong>AI Recommender</strong></p>
+                    <button class="button" onclick="window.location.href='/visual_search'">Find Now</button>
+                </div>
+            </div>
+
+            <!-- Trending Sneakers Section -->
+            <h2 class="trending-title">Trending Now</h2>
+            <div id="trending-sneakers" class="trending-container">
+                <!-- Trending sneakers will be dynamically added here -->
+            </div>
+
+            <!-- Featured Brands -->
+            <h2 class="brands-title">Featured Brands</h2>
+            <div class="brand-scroll">
+                <div class="brand-track">
+                    <div class="brand-item"><img src="static/img/Nike logo.png" alt="Nike"></div>
+                    <div class="brand-item"><img src="static/img/Adidas logo.png" alt="Adidas"></div>
+                    <div class="brand-item"><img src="static/img/Puma logo.png" alt="Puma"></div>
+                    <div class="brand-item"><img src="static/img/Balenciaga logo.png" alt="Balenciaga"></div>
+                    <div class="brand-item"><img src="static/img/Burberry logo.png" alt="Burberry"></div>
+                    <div class="brand-item"><img src="static/img/Valentino logo.png" alt="Valentino"></div>
+                    <div class="brand-item"><img src="static/img/NB logo.png" alt="New Balance"></div>
+                    <div class="brand-item"><img src="static/img/D & G logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/Alexander logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/Prada logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/MK logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/Nike logo.png" alt="Nike"></div>
+                    <div class="brand-item"><img src="static/img/Adidas logo.png" alt="Adidas"></div>
+                    <div class="brand-item"><img src="static/img/Puma logo.png" alt="Puma"></div>
+                    <div class="brand-item"><img src="static/img/Balenciaga logo.png" alt="Balenciaga"></div>
+                    <div class="brand-item"><img src="static/img/Burberry logo.png" alt="Burberry"></div>
+                    <div class="brand-item"><img src="static/img/Valentino logo.png" alt="Valentino"></div>
+                    <div class="brand-item"><img src="static/img/NB logo.png" alt="New Balance"></div>
+                    <div class="brand-item"><img src="static/img/D & G logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/Alexander logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/Prada logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/MK logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/Nike logo.png" alt="Nike"></div>
+                    <div class="brand-item"><img src="static/img/Adidas logo.png" alt="Adidas"></div>
+                    <div class="brand-item"><img src="static/img/Puma logo.png" alt="Puma"></div>
+                    <div class="brand-item"><img src="static/img/Balenciaga logo.png" alt="Balenciaga"></div>
+                    <div class="brand-item"><img src="static/img/Burberry logo.png" alt="Burberry"></div>
+                    <div class="brand-item"><img src="static/img/Valentino logo.png" alt="Valentino"></div>
+                    <div class="brand-item"><img src="static/img/NB logo.png" alt="New Balance"></div>
+                    <div class="brand-item"><img src="static/img/D & G logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/Alexander logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/Prada logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/MK logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/Nike logo.png" alt="Nike"></div>
+                    <div class="brand-item"><img src="static/img/Adidas logo.png" alt="Adidas"></div>
+                    <div class="brand-item"><img src="static/img/Puma logo.png" alt="Puma"></div>
+                    <div class="brand-item"><img src="static/img/Balenciaga logo.png" alt="Balenciaga"></div>
+                    <div class="brand-item"><img src="static/img/Burberry logo.png" alt="Burberry"></div>
+                    <div class="brand-item"><img src="static/img/Valentino logo.png" alt="Valentino"></div>
+                    <div class="brand-item"><img src="static/img/NB logo.png" alt="New Balance"></div>
+                    <div class="brand-item"><img src="static/img/D & G logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/Alexander logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/Prada logo.png" alt="Dolce & Gabbana"></div>
+                    <div class="brand-item"><img src="static/img/MK logo.png" alt="Dolce & Gabbana"></div>
+
+
+                </div>
+            </div>
         </div>
     </div>
 
+    <script>
+        // Example sneaker data (JSON structure)
+        const sneakers = [{
+                "id": 1,
+                "sneaker_image": "https://culture-cirlce-static-dge7g8b8eue6fvcv.z02.azurefd.net/products/puxemrssn/puxemrssn_photo1.jpg",
+                "sneaker_title": "Puma X Emoji RsX³ Sneakers",
+                "price": "13589",
+                "Link": "https://culture-circle.com/products/all/puma-x-emoji-rsx3-sneakers",
+                "gender": "Unisex",
+                "desc": "Collaboration between Puma and Emoji featuring the RS-X� silhouette. Playful design with emoji-inspired details and bold styling.",
+                "color": "Black",
+                "brand": "Puma",
+                "tag": "Bestseller"
+            },
+            {
+                "id": 2,
+                "sneaker_image": "https://image.goat.com/750/attachments/product_template_pictures/images/081/940/718/original/FW_SKDK02_STUD_P22_00M2.png.png",
+        "sneaker_title": "Lanvin Wmns Curb Sneakers 'Graffiti'",
+        "price": "56060",
+        "Link": "https://culture-circle.com/products/all/lanvin-wmns-curb-sneakers-graffiti-golalawmcusngrshwh_g_fw_skdk02_stud_p22_00m2",
+        "gender": "Female",
+        "desc": "Women's version of Lanvin's chunky curb sneaker with graffiti-inspired design. Features bold urban aesthetics with premium construction.",
+        "color": "White",
+        "brand": "Lanvin",
+                "tag": "Almost Gone!"
+            },
+            {
+                "id": 3,
+                "sneaker_image": "https://image.goat.com/750/attachments/product_template_pictures/images/069/769/373/original/1A8J2Q.png.png",
+        "sneaker_title": "Louis Vuitton Abueline Sneakers 'Black Orange'",
+        "price": "93743",
+        "Link": "https://culture-circle.com/products/all/louis-vuitton-abueline-sneakers-black-orange",
+        "gender": "Unisex",
+        "desc": "Luxury sneakers in black with orange accents from Louis Vuitton. Features premium materials with the brand's exceptional craftsmanship.",
+        "color": "Orange",
+        "brand": "Louis Vuitton",
+                "tag": "Trending"
+            },
+            {
+                "id": 4,
+                "sneaker_image": "https://image.goat.com/750/attachments/product_template_pictures/images/099/241/207/original/112421102S_4.png.png",
+        "sneaker_title": "Sneaker Verse x Kai 1 'Kaiverse' China Release",
+        "price": "35162",
+        "Link": "https://culture-circle.com/products/all/sneaker-verse-x-kai-1-kaiverse-china-release-goansnvexka1kachreshsi_g_112421102s_4",
+        "gender": "Unisex",
+        "desc": "China-exclusive collaboration between Sneaker Verse and Kai 1 model. Features special \"Kaiverse\" theme with unique design elements.",
+        "color": "Grey",
+        "brand": "Sneaker",
+                "tag": "Exclusive"
+            },
+            {
+                "id": 5,
+                "sneaker_image": "https://image.goat.com/750/attachments/product_template_pictures/images/059/456/789/original.jpg",
+                "sneaker_title": "Adidas Ultraboost DNA",
+                "price": "15000",
+                "Link": "https://adidas.com/ultraboost-dna",
+                "gender": "Unisex",
+                "desc": "High-performance running shoes with Ultraboost technology.",
+                "color": "Blue",
+                "brand": "Adidas",
+                "tag": "Top Rated"
+            },
+            {
+                "id": 6,
+                "sneaker_image": "https://image.goat.com/750/attachments/product_template_pictures/images/059/456/789/original.jpg",
+                "sneaker_title": "Reebok Classic Leather",
+                "price": "15000",
+                "Link": "https://reebok.com/classic-leather",
+                "gender": "Unisex",
+                "desc": "Timeless Reebok Classic Leather shoes.",
+                "color": "White",
+                "brand": "Reebok",
+                "tag": "Classic"
+            }
+        ];
+
+        function displayTrendingSneakers() {
+            const trendingContainer = document.getElementById('trending-sneakers');
+            trendingContainer.innerHTML = ''; // Clear existing content
+
+            // Display only the first 4 sneakers
+            for (let i = 0; i < Math.min(4, sneakers.length); i++) {
+                const sneaker = sneakers[i];
+                const sneakerItem = document.createElement('div');
+                sneakerItem.classList.add('trending-item');
+
+                sneakerItem.innerHTML = `
+                    <img src="${sneaker.sneaker_image}" alt="${sneaker.sneaker_title}">
+                    <h3>${sneaker.sneaker_title}</h3>
+                    <p>${sneaker.desc}</p>
+                    <a href="${sneaker.Link}" target="_blank">Buy Now for ${sneaker.price}</a>
+                    <span class="tag">${sneaker.tag}</span>
+                `;
+                trendingContainer.appendChild(sneakerItem);
+            }
+        }
+
+        // Call the function to display the sneakers when the page loads
+        window.onload = displayTrendingSneakers;
+    </script>
 </body>
+
 </html>
