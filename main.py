@@ -4,8 +4,6 @@ import re  # Add this line at the beginning of your script
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 
-
-
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 # Load sneaker data from JSON file
@@ -41,7 +39,12 @@ def home():
 def visual_search():
     return render_template('visual_search.html')
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
+@login_required
+def homepage():
+    return render_template('index.html')
+
+@app.route('/login', methods=['GET', 'POST'])
 def login_user():
     if request.method == 'POST':
         email = request.form.get('email')
@@ -78,7 +81,24 @@ def login_google():
     flash('Logged in with Google', 'success')
     return redirect(url_for('home'))
 
+# Simulated shoe-box (cart) storage
+shoe_box = []
 
+@app.route('/api/shoe-box/add', methods=['POST'])
+def add_to_shoe_box():
+    try:
+        data = request.json
+        sneaker_id = data.get('sneaker_id')
+
+        if sneaker_id:
+            shoe_box.append(sneaker_id)  # Add sneaker to the shoe-box list
+            return jsonify({'message': 'Sneaker added to Shoe Box', 'shoe-box': shoe-box}), 200
+        else:
+            return jsonify({'error': 'Invalid sneaker ID'}), 400
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'error': 'Internal Server Error'}), 500
 
 @app.route('/questionnaire', methods=['GET', 'POST'])
 @login_required
@@ -93,7 +113,7 @@ def sneakers():
 @app.route('/trending')
 @login_required
 def recommendations():
-    return render_template('recommendations.html')  # After questionnaire, show sneakers
+    return render_template('trending.html')  # After questionnaire, show sneakers
 
 @app.route('/shoe-box')
 def shoe_box():
