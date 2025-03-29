@@ -1,7 +1,9 @@
 # Sneakerदर्ज़ी  
 ## A sneaker e-commerce website based on the popular dating application swiping models 👟 
 
-![home_page](SneakerDarziHome.jpg)
+<p align="center">
+  <img src="SneakerDarziHome.png" alt="My Image" width="300">
+</p>
 
 The features of the web-app currently consist of:
 
