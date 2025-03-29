@@ -1,331 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SneakerDarzi - Visual Search</title>
-
-  <style>
-    /* Basic styling to match the SneakerDarzi app */
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9fafb;
-      color: #111827;
-    }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    .header {
-      width: 100%;
-      padding: 3rem 0;
-      background: linear-gradient(to right, #3b82f6, #8b5cf6);
-      color: white;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .header h1 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-
-    .header p {
-      font-size: 1.25rem;
-      max-width: 600px;
-      margin: 1rem auto;
-    }
-
-    .upload-section {
-      background: white;
-      border-radius: 0.5rem;
-      padding: 2rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      margin-bottom: 2rem;
-    }
-
-    .upload-section p {
-      margin-bottom: 1.5rem;
-      color: #4b5563;
-    }
-
-    .file-input-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      align-items: center;
-      justify-content: center;
-      border: 2px dashed #d1d5db;
-      border-radius: 0.5rem;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      background-color: #f9fafb;
-    }
-
-    .file-input-container input[type="file"] {
-      display: none;
-    }
-
-    .file-input-label {
-      background-color: #f3f4f6;
-      color: #4b5563;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.375rem;
-      cursor: pointer;
-      font-weight: 500;
-      border: 1px solid #d1d5db;
-    }
-
-    .file-input-label:hover {
-      background-color: #e5e7eb;
-    }
-
-    button {
-      background-color: #4f46e5;
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.375rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-
-    button:hover {
-      background-color: #4338ca;
-    }
-
-    .results-section {
-      background: white;
-      border-radius: 0.5rem;
-      padding: 2rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-
-    .results-section h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-      text-align: left;
-    }
-
-    #resultsContainer {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1.5rem;
-      text-align: left;
-    }
-
-    .sneaker-card {
-      border: 1px solid #e5e7eb;
-      border-radius: 0.5rem;
-      overflow: hidden;
-      height: 350px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sneaker-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: contain;
-      margin: 0 auto;
-      display: block;
-    }
-
-    .sneaker-info {
-      padding: 1rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sneaker-info h3 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1rem;
-    }
-
-    .sneaker-info p {
-      margin: 0;
-      color: #6b7280;
-      font-size: 0.875rem;
-    }
-
-    .similarity-score {
-      display: inline-block;
-      background-color: #e0f2fe;
-      color: #0369a1;
-      padding: 0.25rem 0.5rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      margin-top: 0.5rem;
-    }
-
-    /* Normalize all sneaker images regardless of class name or source */
-    img[src*="sneaker"],
-    .sneaker-image,
-    [class*="sneaker"] img,
-    [id*="sneaker"] img,
-    #resultsContainer img {
-      width: 200px;
-      height: 150px;
-      object-fit: contain;
-      margin: 0 auto;
-      display: block;
-    }
-
-    /* Standardize sneaker containers */
-    .sneaker-container,
-    [class*="sneaker-item"],
-    [id*="sneaker-item"] {
-      height: 350px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    footer {
-      background-color: #111827;
-      color: white;
-      padding: 1.5rem;
-      margin-top: 3rem;
-      text-align: center;
-    }
-
-    footer p {
-      margin: 0.5rem 0;
-      color: #9ca3af;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .footer-links a {
-      color: #9ca3af;
-      text-decoration: none;
-    }
-
-    .footer-links a:hover {
-      color: #f9fafb;
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
-      .container {
-        padding: 1rem;
-      }
-
-      .header {
-        padding: 2rem 1rem;
-      }
-
-      .header h1 {
-        font-size: 2rem;
-      }
-
-      #resultsContainer {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 1rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <link rel="stylesheet" href="static/css/home.css">
+    <title>Shoes Store</title>
 </head>
+
 <body>
-  <div class="header">
-    <h1>SneakerDarzi</h1>
-    <p>Visual Search</p>
-    <p>Upload an image of any sneaker and our AI will find the most similar matches for you</p>
-  </div>
+    <!-- Navigation Bar -->
+    <!-- Main Section -->
+    <section>
+        <div class="content">
+            <div class="main-content">
+                <h1 data-aos="fade-right" data-aos-duration="2000">Sneakerदर्ज़ी</h1>
+                <h2 data-aos="fade-left" data-aos-duration="2000" data-aos-delay="200">Left swipe regret, right swipe drip</h2> 
+                <h4 data-aos="fade-right" data-aos-duration="2000" data-aos-delay="400"></h4>
+                <p data-aos="flip-down" data-aos-duration="2000" data-aos-delay="600">
+                  The ultimate sneaker matchmaker for true sneakerheads! Discover the latest drops, swipe through curated styles, and find your perfect pair with ease. Whether you're after classics or hype releases, SneakerDarzi ensures you never miss a match. Because great sneakers deserve the perfect owner. 
+                </p>
+                <div class="order">
+                    <a href="/login"><button data-aos="zoom-in-left" data-aos-duration="2000" data-aos-delay="800">Login</button></a>
+                    <a href="/trending"><button data-aos="zoom-in-left" data-aos-duration="2000" data-aos-delay="800">Hot Ones Around</button></a>
+                </div>
+            </div>
+            <div class="image">
+                <img src="static/img/shoes.png" alt="Nike Shoes" data-aos="zoom-in" data-aos-duration="2000">
+            </div>
+        </div>
+    </section>
 
-  <div class="container">
-    <div class="upload-section">
-      <p>Choose an image of a sneaker to find similar ones.</p>
-
-      <div class="file-input-container">
-        <label for="sneakerImage" class="file-input-label">Choose File</label>
-        <input type="file" id="sneakerImage" accept="image/*" />
-        <p>Or drag and drop your image here</p>
-      </div>
-
-      <button id="checkBtn">Find Similar Sneakers</button>
-    </div>
-
-    <div class="results-section">
-      <h2>Matching Sneakers:</h2>
-      <div id="resultsContainer"></div>
-    </div>
-  </div>
-
-  <footer>
-    <h2>SneakerDarzi</h2>
-    <p>Find your perfect sneaker match with AI</p>
-    <div class="footer-links">
-      <a href="#">About</a>
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="#">Contact</a>
-    </div>
-  </footer>
-
-  <!-- TensorFlow.js and MobileNet -->
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
-
-  <!-- Your main.js script -->
-  <script src="static/js/main.js"></script>
-
-  <script>
-    // Add drag and drop functionality
-    const fileInputContainer = document.querySelector('.file-input-container');
-    const fileInput = document.getElementById('sneakerImage');
-
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-      fileInputContainer.addEventListener(eventName, preventDefaults, false);
-    });
-
-    function preventDefaults(e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
-    ['dragenter', 'dragover'].forEach(eventName => {
-      fileInputContainer.addEventListener(eventName, highlight, false);
-    });
-
-    ['dragleave', 'drop'].forEach(eventName => {
-      fileInputContainer.addEventListener(eventName, unhighlight, false);
-    });
-
-    function highlight() {
-      fileInputContainer.style.borderColor = '#4f46e5';
-      fileInputContainer.style.backgroundColor = '#eff6ff';
-    }
-
-    function unhighlight() {
-      fileInputContainer.style.borderColor = '#d1d5db';
-      fileInputContainer.style.backgroundColor = '#f9fafb';
-    }
-
-    fileInputContainer.addEventListener('drop', handleDrop, false);
-
-    function handleDrop(e) {
-      const dt = e.dataTransfer;
-      const files = dt.files;
-
-      if (files.length) {
-        fileInput.files = files;
-      }
-    }
-  </script>
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 1
+        });
+    </script>
 </body>
+
+<a href="https://madewithloveinindia.org" target="_blank" class="made-in-india">
+   Made with <span aria-label="Love"> &hearts; </span>  in India
+</a>
+
+
 </html>
+
+<!-- Solemate toh milna hi tha -->
