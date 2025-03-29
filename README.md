@@ -11,18 +11,19 @@ Sneaker Swipe functionality
 Sneaker Cart + Payment Functionality
 The structure of the application consists of the following files/folders:
 
-### /templates (folder for html files)
-	/partials (folder consisting of fixed header.html and head_links.html)
-  /index.html (home page of application)
-  /login.html (login page)
-  /dashboard.html (dashboard page)
-  /questionnaire.html (filters page)
-  /sneakers.html (sneaker swipe page)
-  /visual-search.html (sneaker upload page)
-  /shoe-box.html (cart page)
-  /shipping.html (shipping page)
-  /payment.html (payment page)
-  /confirmation.html (payment confirmation page)
+### /templates (folder for html files)'
+	  /index.html (home page of application)
+	  /login.html (login page)
+	  /dashboard.html (dashboard page)
+	  /questionnaire.html (filters page)
+	  /sneakers.html (sneaker swipe page)
+	  /visual-search.html (sneaker upload page)
+	  /shoe-box.html (cart page)
+	  /shipping.html (shipping page)
+	  /payment.html (payment page)
+	  /confirmation.html (payment confirmation page)
+
+/partials (folder consisting of fixed header.html and head_links.html)
 
 ### /static (folder for css+js+image files)
 	/css (folder consisting of css files)
