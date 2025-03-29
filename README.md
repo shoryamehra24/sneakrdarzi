@@ -2,7 +2,7 @@
 ## A sneaker e-commerce website based on the popular dating application swiping models 👟 
 
 <p align="center">
-  <img src="SneakerDarziHome.png" alt="My Image" width="300">
+  <img src="SneakerDarziHome.png" alt="My Image" width="800">
 </p>
 
 The features of the web-app currently consist of:
